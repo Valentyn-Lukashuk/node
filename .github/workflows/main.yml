@@ -1,0 +1,45 @@
+name: Push-to-EC2
+
+# Trigger deployment only on push to master branch
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Deploy to EC2 on master branch push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '12'
+      - run: npm install
+      - run: npm run test    
+      - name: build 
+        run: docker build -t vl96/node:latest ./
+      - name: Docker login
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCES_TOKIN }}
+      - name: push image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: vl96/node:latest
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/
+            docker stop $(docker ps -a -q)
+            docker container prune
+            docker rmi vl96/node:latest
+            docker run -d -p80:3000 vl96/node:latest  
