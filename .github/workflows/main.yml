@@ -16,7 +16,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '12'
-      #- run: npm install --save-dev jest ts-jest typescript
       - run: npm install
       - run: npm run test    
       - name: build 
@@ -40,4 +39,7 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             cd /home/ubuntu/
+            docker stop $(docker ps -a -q)
+            docker container prune
+            docker rmi vl96/node:latest
             docker run -d -p80:3000 vl96/node:latest  
