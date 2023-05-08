@@ -9,7 +9,7 @@ DATABASE_URI =
 ```
 
 ### Set up:
-
+#
 - git clone
 - npm install
 - npm run start:dev
