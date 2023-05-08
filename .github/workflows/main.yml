@@ -14,7 +14,7 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
       - name: run tests
-        working-directory: /home/runner/work/node3/node3/
+        working-directory: /home/runner/work/node4/node4/
         run: npm run test    
       - name: build 
         run: docker build -t vl96/node:latest ./
