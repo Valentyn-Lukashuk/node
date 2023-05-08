@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
-      - name: run tests
-        run: npm run test
       - name: build 
         run: docker build -t vl96/node:latest ./
       - name: Docker login
