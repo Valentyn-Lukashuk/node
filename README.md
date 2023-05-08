@@ -5,7 +5,7 @@ A tutorial on how to create a simple nestjs application, creating e2e endpoints 
 .env variable
 
 ```
-DATABASE_URI = 
+DATABASE_URI =  
 ```
 
 ### Set up:
