@@ -40,4 +40,4 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             cd /home/ubuntu/
-            docker run -d -p3000:3000 vl96/node:latest  
+            docker run -d -p80:3000 vl96/node:latest  
