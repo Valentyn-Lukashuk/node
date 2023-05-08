@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '10'
-      - run: npm install jest
+      - run: npm install --save-dev jest
       - run: npm run test    
       - name: build 
         run: docker build -t vl96/node:latest ./
