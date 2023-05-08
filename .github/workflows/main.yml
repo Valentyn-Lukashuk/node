@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
+      - name: run tests
+        working-directory: /home/runner/work/node3/node3/
+        run: npm run test    
       - name: build 
         run: docker build -t vl96/node:latest ./
       - name: Docker login
@@ -26,3 +29,12 @@ jobs:
           context: .
           push: true
           tags: vl96/node:latest
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/
+            docker run -d -p3000:3000 vl96/node:latest  
