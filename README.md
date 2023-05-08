@@ -2,7 +2,7 @@
 
 A tutorial on how to create a simple nestjs application, creating e2e endpoints and documenting the APIs
 
-.env variable
+ .env variable
 
 ```
 DATABASE_URI =  
