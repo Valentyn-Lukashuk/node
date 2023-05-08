@@ -30,7 +30,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: vl96/node:latest
+          tags: vl96/node:latest, vl96/node:${{ github.run_number }}
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
