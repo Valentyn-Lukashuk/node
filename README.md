@@ -10,7 +10,7 @@ DATABASE_URI =
 
 ### Set up:
 #
-- git clone
+- git clone 
 - npm install
 - npm run start:dev
 - npm run test:e2e
